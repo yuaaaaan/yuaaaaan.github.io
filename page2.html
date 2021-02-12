@@ -74,4 +74,19 @@
       </div>
     </div>
   </body>
+
+  <script type="text/javascript">
+    var imgg = document.getElementsByTagName("img");
+    for(var i=0;i<imgg.length;i++){
+          if (i!=4){
+            imgg[i].onclick=function(){
+            alert("没有找对哦");};
+          }
+          else{
+            imgg[i].onclick=function(){
+            alert("没想到居然被找到了");};
+          }
+        }
+          
+  </script> 
 </html>
