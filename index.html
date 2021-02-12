@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>致亲爱的邓邓</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 800px;
+        background-color: rgb(0, 0,0);
+      }
+      .h1_1{
+        color: white;
+        position: absolute;
+        bottom: 180px;
+      }
+      .h1_2{
+        color: white;
+        position: absolute;
+        bottom: 140px;
+      }
+      h3{
+        color: white;
+      }
+      .timer b{
+        font-size: 90px;
+        color: white;
+      }
+      #time{
+        position: absolute;
+        bottom: 40px;
+      }
+      ul {
+        position: relative;
+        display: flex;
+        height: 100px;
+      }
+      ul::after {
+        content: "送给亲爱的邓邓";
+        position: absolute;
+        top: -200px;
+        left: 21%;
+        color: darkturquoise;
+        font-size: 30px;
+        font-weight: 700;
+      }
+      button{
+        background-color: rgb(129, 207, 252);
+        position: absolute;
+        top: 750px;
+        border-radius: 8px;
+        font-size: 20px;
+        padding: 4px;
+      }
+      li {
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        margin: 0 10px;
+      }
+      li:nth-child(1) {
+        background-color: red;
+        animation: love1 5s 0s infinite;
+      }
+      li:nth-child(2) {
+        background-color: darkturquoise;
+        animation: love2 5s 0.2s infinite;
+      }
+      li:nth-child(3) {
+        background-color: darksalmon;
+        animation: love3 5s 0.4s infinite;
+      }
+      li:nth-child(4) {
+        background-color: deeppink;
+        animation: love4 5s 0.6s infinite;
+      }
+      li:nth-child(5) {
+        background-color: yellow;
+        animation: love5 5s 0.8s infinite;
+      }
+      li:nth-child(6) {
+        background-color: deeppink;
+        animation: love4 5s 1s infinite;
+      }
+
+      li:nth-child(7) {
+        background-color: darksalmon;
+        animation: love3 5s 1.2s infinite;
+      }
+
+      li:nth-child(8) {
+        background-color: darkturquoise;
+        animation: love2 5s 1.4s infinite;
+      }
+
+      li:nth-child(9) {
+        background-color: red;
+        animation: love1 5s 1.6s infinite;
+      }
+      /* 下面定义动画 */
+      @keyframes love1 {
+        30%,
+        50% {
+          height: 60px;
+          transform: translateY(-30px);
+        }
+        70%,
+        100% {
+          height: 20px;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes love2 {
+        30%,
+        50% {
+          height: 125px;
+          transform: translateY(-60px);
+        }
+
+        70%,
+        100% {
+          height: 20px;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes love3 {
+        30%,
+        50% {
+          height: 160px;
+          transform: translateY(-75px);
+        }
+
+        70%,
+        100% {
+          height: 20px;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes love4 {
+        30%,
+        50% {
+          height: 180px;
+          transform: translateY(-60px);
+        }
+
+        70%,
+        100% {
+          height: 20px;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes love5 {
+        30%,
+        50% {
+          height: 200px;
+          transform: translateY(-45px);
+        }
+
+        70%,
+        100% {
+          height: 20px;
+          transform: translateY(0);
+        }
+      }
+    </style>
+    
+  </head>
+  <body>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <h1 class='h1_1'>今天是2021年2月14日情人节</h1>
+    <h1 class='h1_2'>现在是我们在一起的</h1>
+    <div id='time'>
+      <h3 class="timer">
+        <b id="d"></b> 天 <b id="h"></b> 时 <b id="m"></b> 分 <b id="s"></b> 秒
+      </h3>
+    </div>
+    
+    <button onclick="NewWindow()">点这里翻页发掘彩蛋哦</button>
+  </body>
+
+  <script>
+    function timer() {
+        var start = new Date(2019, 10, 9, 17, 40, 00); 
+        var t = new Date() - start;
+        var h = ~~(t / 1000 / 60 / 60 % 24);
+        if (h < 10) {
+            h = "0" + h;
+        }
+        var m = ~~(t / 1000 / 60 % 60);
+        if (m < 10) {
+            m = "0" + m;
+        }
+
+        var s = ~~(t / 1000 % 60);
+        if (s < 10) {
+            s = "0" + s;
+        }h
+        document.getElementById('d').innerHTML = ~~(t / 1000 / 60 / 60 / 24);
+        document.getElementById('h').innerHTML = h;
+        document.getElementById('m').innerHTML = m;
+        document.getElementById('s').innerHTML = s;
+    }
+    timer();
+    setInterval(function(){timer()}, 1000);
+
+    function NewWindow(){
+      window.open("page2.html", "_self")
+    }
+  </script>
+</html>
