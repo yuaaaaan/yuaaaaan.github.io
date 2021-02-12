@@ -2,17 +2,26 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <style>
       body {
-        height: 600px;
+        height: 800px;
         background-color: rgb(0, 0,0);
       }
       img{
-        display: block;
-        margin: 0 auto;
-        padding: 10% 0;      
+        position: relative;
+        display: flex;
+        height: 200px;
+        flex-direction: row;
+        justify-content: space-between; 
+        flex-wrap: wrap;    
+      }
+      
+      div{
+        position: relative;
+        display: flex;
+        justify-content: space-between;
       }
       .div1{
         margin: auto;
@@ -23,44 +32,44 @@
 
   <body>
     <div class='div1'>
-      <p style="color:white;text-align:center;font-size:20px;">
+      <p style="color:white;text-align:center;font-size:20px;width:100%;">
         这是我们在一起的第二个情人节，不过却又一次是相隔千里度过。虽未能相见，但仍可翻阅过往的回忆。
         在过往的回忆中我隐藏了一个小彩蛋，点到正确的额图片就能找到哦！ 
       </p>
     </div>
 
     <div class='div1'>
-      <div style="background-image:url('pic/beijing.png');height:33.3%;width:33.3%;float:left;">    
+      <div style="background-image:url('pic/beijing.png');">    
         <img src='pic/5.png' width="200" height="200">
       </div>
-      <div style="background-image:url('pic/beijing.png');height:33.3%;width:33.3%;float:left;">
+      <div style="background-image:url('pic/beijing.png');">
         <img src='pic/2.png' width="200" height="200">
       </div>
-      <div style="background-image:url('pic/beijing.png');color:#FFFFFF;height:33.3%;width:33.3%;float:left;">
+      <div style="background-image:url('pic/beijing.png');color:#FFFFFF;200">
         <img src='pic/3.png' width="200" height="200">
       </div>
     </div>
 
     <div class='div1'>
-      <div style="background-image:url('pic/beijing.png');height:33.3%;width:33.3%;float:left;">    
+      <div style="background-image:url('pic/beijing.png');200">    
         <img src='pic/4.png' width="200" height="200">
       </div>
-      <div style="background-image:url('pic/beijing.png');height:33.3%;width:33.3%;float:left;">
+      <div style="background-image:url('pic/beijing.png');200">
         <img src='pic/1.png' width="200" height="200">
       </div>
-      <div style="background-image:url('pic/beijing.png');color:#FFFFFF;height:33.3%;width:33.3%;float:left;">
+      <div style="background-image:url('pic/beijing.png');color:#FFFFFF;200">
         <img src='pic/7.png' width="200" height="200">
       </div>
     </div>
 
     <div class='div1'>
-      <div style="background-image:url('pic/beijing.png');height:33.3%;width:33.3%;float:left;">    
+      <div style="background-image:url('pic/beijing.png');200">    
         <img src='pic/6.png' width="200" height="200">
       </div>
-      <div style="background-image:url('pic/beijing.png');height:33.3%;width:33.3%;float:left;">
+      <div style="background-image:url('pic/beijing.png');200">
         <img src='pic/8.png' width="200" height="200">
       </div>
-      <div style="background-image:url('pic/beijing.png');color:#FFFFFF;height:33.3%;width:33.3%;float:left;">
+      <div style="background-image:url('pic/beijing.png');color:#FFFFFF;200">
         <img src='pic/9.png' width="200" height="200">
       </div>
     </div>
