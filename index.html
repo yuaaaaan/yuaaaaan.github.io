@@ -250,7 +250,8 @@ async function claim(){
   
   const eos = scatter.eos(network, Eos);
   eos.transaction({
-      actions: [{
+      actions: [
+	  /*{
         account: 'usdxusdxusdx',
         name: 'transfer',
         authorization: authorization,
@@ -260,7 +261,7 @@ async function claim(){
           from: account.name,
             to:'stenzhouhome'
         }
-      },
+      },*/
           {
         account: 'usdxusdxusdx',
         name: 'transfer',
