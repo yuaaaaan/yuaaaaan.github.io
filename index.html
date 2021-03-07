@@ -139,7 +139,7 @@
     var nodeurly = 'https://yas.maiziqianbao.net'
     var autoclaim=0
     var arramount=""
-    var timenum=900
+    var timenum=1500
     var claimnum=0
     var usdc_bal=0
     var usdt_bal=0
@@ -382,7 +382,7 @@ async function claim(){
       timenum-=1
         time.innerHTML= "当前时间："+currenttime()+"，"
         if(autoclaim==1){time.innerHTML= "当前时间："+currenttime()+"，距下次执行还有："+timenum+"秒"}
-        if(timenum<0){timenum=900}
+        if(timenum<0){timenum=1500}
     }
    
     function currenttime() {
@@ -438,7 +438,7 @@ async function claim(){
     //////////////////////////////////////////////
     function change(){
         if(btn_autorun.innerHTML=="点击暂停"){btn_autorun.innerHTML="自动开始";$(btn_autorun).removeClass('btn-danger');$(btn_autorun).addClass('btn-primary');autoclaim=0}
-        else{btn_autorun.innerHTML="点击暂停";$(btn_autorun).removeClass('btn-primary');$(btn_autorun).addClass('btn-danger');autoclaim=1;timenum=600}
+        else{btn_autorun.innerHTML="点击暂停";$(btn_autorun).removeClass('btn-primary');$(btn_autorun).addClass('btn-danger');autoclaim=1;timenum=1500}
         
     }
     //////////////////////////////////////////////
@@ -538,7 +538,7 @@ async function claim(){
     var timer=setInterval(getbl,4000);
     var timer=setInterval(au_time,1000);
     var timer=setInterval(load_price,4000);
-    var timer2=setInterval(autorun,1000*60*15);
+    var timer2=setInterval(autorun,1000*60*25);
     </script>    
 </html>
 
