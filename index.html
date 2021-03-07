@@ -1,238 +1,543 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" /> 
-
-    <title>致亲爱的邓邓</title>
-    <style>
-      * {
-        padding: 0;
-        margin: 0;
-      }
-      body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 800px;
-        background-color: rgb(0, 0,0);
-        font-size: 100%;
-      }
-      .h1_1{
-        color: white;
-        position: absolute;
-        bottom: 180px;
-        font-size: 1.7em;
-      }
-      .h1_2{
-        color: white;
-        position: absolute;
-        bottom: 140px;
-        font-size: 1.7em;
-      }
-      h3{
-        color: white;
-        position: relative;
-        font-size: 1.8em;
-
-      }
-      .timer b{
-        font-size: 1.3em;
-        color: white;
-      }
-      #time{
-        position: absolute;
-        bottom: 40px;
-      }
-      ul {
-        position: relative;
-        display: flex;
-        height: 100px;
-      }
-      ul::after {
-        content: "送给亲爱的邓邓";
-        position: absolute;
-        top: -200px;
-        left: 21%;
-        color: darkturquoise;
-        font-size: 30px;
-        font-weight: 700;
-      }
-      button{
-        background-color: rgb(129, 207, 252);
-        position: absolute;
-        top: 750px;
-        border-radius: 8px;
-        font-size: 20px;
-        padding: 4px;
-      }
-      li {
-        width: 20px;
-        height: 20px;
-        border-radius: 10px;
-        margin: 0 10px;
-      }
-      li:nth-child(1) {
-        background-color: red;
-        animation: love1 5s 0s infinite;
-      }
-      li:nth-child(2) {
-        background-color: darkturquoise;
-        animation: love2 5s 0.2s infinite;
-      }
-      li:nth-child(3) {
-        background-color: darksalmon;
-        animation: love3 5s 0.4s infinite;
-      }
-      li:nth-child(4) {
-        background-color: deeppink;
-        animation: love4 5s 0.6s infinite;
-      }
-      li:nth-child(5) {
-        background-color: yellow;
-        animation: love5 5s 0.8s infinite;
-      }
-      li:nth-child(6) {
-        background-color: deeppink;
-        animation: love4 5s 1s infinite;
-      }
-
-      li:nth-child(7) {
-        background-color: darksalmon;
-        animation: love3 5s 1.2s infinite;
-      }
-
-      li:nth-child(8) {
-        background-color: darkturquoise;
-        animation: love2 5s 1.4s infinite;
-      }
-
-      li:nth-child(9) {
-        background-color: red;
-        animation: love1 5s 1.6s infinite;
-      }
-      /* 下面定义动画 */
-      @keyframes love1 {
-        30%,
-        50% {
-          height: 60px;
-          transform: translateY(-30px);
-        }
-        70%,
-        100% {
-          height: 20px;
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes love2 {
-        30%,
-        50% {
-          height: 125px;
-          transform: translateY(-60px);
-        }
-
-        70%,
-        100% {
-          height: 20px;
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes love3 {
-        30%,
-        50% {
-          height: 160px;
-          transform: translateY(-75px);
-        }
-
-        70%,
-        100% {
-          height: 20px;
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes love4 {
-        30%,
-        50% {
-          height: 180px;
-          transform: translateY(-60px);
-        }
-
-        70%,
-        100% {
-          height: 20px;
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes love5 {
-        30%,
-        50% {
-          height: 200px;
-          transform: translateY(-45px);
-        }
-
-        70%,
-        100% {
-          height: 20px;
-          transform: translateY(0);
-        }
-      }
-    </style>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="pragma" content="no-cache">   
+<meta http-equiv="Cache-Control"  content="no-cache, must-revalidate">   
+<meta http-equiv="expires"  content="0">  
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=0">
+<title>懒癌快乐器</title>
+<link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    .con {
+       float:left;
+        margin-right: 20px;
+        width: 100%;
+    }
+    span {
+       
+       
+    }
+    .badge{
+        
+       
+    }
+    .s {
+        font-size: 8pt;
+    }
+     .s1 {
+        
+         margin-top: 10px;
+    }
+    .info_fluid{
+        width: 100%;
+        height: 100%;
+    }
+    .info{
+        padding-left: 10px;
+      font-size: 9pt;
+     color: aliceblue;
+    }
     
-  </head>
-  <body>
-    <ul>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-    </ul>
-    <h1 class='h1_1'>今天是2月14日情人节</h1>
-    <h1 class='h1_2'>现在是我们在一起的</h1>
-    <div id='time'>
-      <h3 class="timer">
-        <b id="d"></b> 天 <b id="h"></b> 时 <b id="m"></b> 分 <b id="s"></b> 秒
-      </h3>
+     body{
+        
+        background-color: #4a5568;
+    }
+.cardd {
+    overflow:hidden;
+   margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 10px; 
+    
+  position:relative;
+  width: 100%;
+  height:100%;
+  transition:1s ease-in-out;
+  transform-style: preserve-3d;
+  border-radius:5px;
+  box-shadow: 0px 0px 20px #000;
+  background-color:white;
+}    
+    
+</style>
+</head>
+
+
+<body>
+<div clas="container"> 
+  <div class="btn btn-large">
+      <span id = "account" class="badge badge-info">账户名：</span>
+      <span id = "usdc_bal" class="badge badge-success">0USDC</span>
+      <span id = "usdt_bal" class="badge badge-success">0USDT</span>
+     
     </div>
+  <div class="container-fluid">
+      <button class="btn btn-large btn-primary s1" type="button" onClick="claim()">领取</button>
+      <button class="btn btn-large btn-primary s1" type="button" onClick="swap()">兑换</button>
+      <button class="btn btn-large btn-primary s1" type="button" onClick="deposit()">增加LP</button>
+    <button class="btn btn-large btn-primary s1" id="btn_autorun" type="button" onClick="change()">自动开始</button>
+      <button class="btn btn-large btn-primary s1" id="btn_rate" type="button" onClick="ratehigh()">开启高年化模式</button>
+  </div>
+     <div class="container-fluid">
+     <div class="cardd"> 
+                   <div id="usdc_price" class="con">
+            <span class="badge badge-info">池子余额：</span>
+            <span id = "usdc_price_now" class="badge badge-success">0</span>
+            <span class="badge badge-info">6小时平均：</span>
+            <span id = "usdc_price_avg" class="badge badge-success">0</span><br/>
+            <span class="badge badge-info">6小时最高：</span>
+            <span id = "usdc_price_max" class="badge badge-success">0</span>
+            <span class="badge badge-info">6小时最低：</span>
+            <span id = "usdc_price_min" class="badge badge-success">0</span>
+                   <hr  size="1">   
+         </div>
+         
+        <div  class="con">
+            <span class="badge badge-info">单池占比：</span>
+            <span id = "usdc_t_per" class="badge badge-success">0</span>
+            <span class="badge badge-info">单池排名：</span>
+            <span id = "usdc_t_rank" class="badge badge-success">0</span><br/>
+            <span class="badge badge-info">我的做市：</span>
+            <span id = "my_pool" class="badge badge-success">0</span><br/>
+            <span class="badge badge-info">总额：</span>
+            <span id = "usdc_t_total" class="badge badge-success">0</span>
+         </div>
+
+     </div>
+  </div>
+    <div class="info">
+    1. 先加入白名单，点2次领取按钮，会出现选项。<br/>
+        2. 收费0.02 USDC（每次，仅复投收费）。<br/>
+        3. 自动运行，10分钟一次收矿复投（卖一半）。<br/>
+        4. 仅支持usdt-usdc交易对。<br/>
+        5. 手机保持常亮。<br/>
+        6. usdc余额大于1。<br/>
+        7. 池子余额大于平均值，APY较高，点领取即可。<br/>
+        8. 开启高年化，池子余额超过均价才会收取奖励。<br/>
+        <p id="time" class="s"></p>
+        <p id="info" class="s"><br/></p>
+    </div>
+    </div>
+  
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/eosjs@16.0.9/lib/eos.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/eosjs-api@7.0.4/lib/eos-api.min.js"></script>
+<script>
+   
     
-    <button onclick="NewWindow()">点这里翻页发掘彩蛋哦</button>
-  </body>
-
-  <script>
-    function timer() {
-        var start = new Date(2019, 10, 9, 17, 40, 00); 
-        var t = new Date() - start;
-        var h = ~~(t / 1000 / 60 / 60 % 24);
-        if (h < 10) {
-            h = "0" + h;
+ var network = {
+  blockchain: 'eos', // or eosforce
+  protocol: 'https',
+  host: 'eospush.tokenpocket.pro',
+  port: 443,
+  chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906'
+};
+    //var nodeurl = 'https://eospush.tokenpocket.pro'
+    var nodeurl = 'https://eos.blockeden.cn'
+    var nodeurly = 'https://yas.maiziqianbao.net'
+    var autoclaim=0
+    var arramount=""
+    var timenum=600
+    var claimnum=0
+    var usdc_bal=0
+    var usdt_bal=0
+    var dfs_bal=0
+    var usdc_now=0
+    var usdc_avg=0
+    var highrate=0
+    var usdc_t_lq=0
+    var usdc_t_lqt=0
+    var usdc_t_price=0
+    var usdc_res=0
+    var usdc_t_res=0
+    var currentAccount = null
+    
+    function login() {
+    scatter = window.scatter;
+    scatter.getIdentity({accounts: [network]}).then(function (result) {
+    currentAccount = result.accounts[0];
+    document.getElementById("account").innerHTML = currentAccount.name
+    
+  }).catch(error => {
+    alert('error:' + JSON.stringify(error));
+  });
+}
+/////////////////////////////////////////////get_balance
+        function getbl(){
+                 rpc = EosApi({
+                     httpEndpoint: nodeurl
+                                });
+      
+  var ret1 = rpc.getCurrencyBalance({
+     "code":"usdxusdxusdx",
+     "account": currentAccount.name,
+     "symbol": "USDC"
+     
+    })
+    .then ( async result =>  {
+      usdc_bal = result[0]
+        document.getElementById("usdc_bal").innerHTML=result[0]
+        //alert(usdc_bal.substr(usdc_bal,usdc_bal.indexOf(" ")))
+      })     
+        
+  var ret2 = rpc.getCurrencyBalance({
+     "code":"tethertether",
+     "account": currentAccount.name,
+     "symbol": "USDT"
+     
+    })
+    .then ( async result =>  {
+      usdt_bal = result[0]
+        document.getElementById("usdt_bal").innerHTML=result[0]
+        
+       
+      })     
+        
+  
+   var ret3 = rpc.getCurrencyBalance({
+     "code":"minedfstoken",
+     "account": currentAccount.name,
+     "symbol": "DFS"
+     
+    })
+    .then ( async result =>  {
+      dfs_bal = result[0]
+        document.getElementById("dfs_bal").innerHTML=result[0]
+      })     
+  
+  
+  }
+////////////////////////////////////////////claim
+async function claim(){
+  const account = scatter.identity.accounts.find(x => x.blockchain === 'eos');
+  const authorization= [{ actor: account.name,permission: account.authority}];
+  
+  const eos = scatter.eos(network, Eos);
+  eos.transaction({
+      actions: [{
+        account: 'usdxcorefarm',
+        name: 'claim',
+        authorization: authorization,
+        data: {
+          mid:'722',
+          user: account.name
         }
-        var m = ~~(t / 1000 / 60 % 60);
-        if (m < 10) {
-            m = "0" + m;
+      }]
+    }).then(async trx => {
+      
+      let t= await getbl()
+      
+      
+      
+     //alert("领取成功。");
+    })
+    .catch(err => {
+      //console.log(err);
+     
+      //alert("出现一个作者不懂的八哥");
+    });
+
+}
+////////////////////////////////////////////
+   
+    //////////////////////////////////////////////
+ async function swap(){
+  
+  const account = scatter.identity.accounts.find(x => x.blockchain === 'eos');
+  const authorization= [{ actor: account.name,permission: account.authority}];
+  
+  const eos = scatter.eos(network, Eos);
+  eos.transaction({
+      actions: [{
+        account: 'usdxusdxusdx',
+        name: 'transfer',
+        authorization: authorization,
+        data: {
+      quantity: "0.0200 USDC",
+          memo:'fees',
+          from: account.name,
+            to:'stenzhouhome'
         }
+      },
+          {
+        account: 'usdxusdxusdx',
+        name: 'transfer',
+        authorization: authorization,
+        data: {
+      quantity: ((usdc_bal.substr(usdc_bal,usdc_bal.indexOf(" "))-0.001)/2).toFixed(4)+" "+"USDC",
+          memo:'swap:722:0:0',
+          from: account.name,
+            to:'defisswapcnt'
+        }
+      }
+          
+      ]
+    }).then(trx => {
+      getbl()
+            
+      //alert("领取成功。");
+    })
+    .catch(err => {
+     // console.log(err);
+     
+      //alert(err);
+    });
 
-        var s = ~~(t / 1000 % 60);
-        if (s < 10) {
-            s = "0" + s;
-        }h
-        document.getElementById('d').innerHTML = ~~(t / 1000 / 60 / 60 / 24);
-        document.getElementById('h').innerHTML = h;
-        document.getElementById('m').innerHTML = m;
-        document.getElementById('s').innerHTML = s;
-    }
-    timer();
-    setInterval(function(){timer()}, 1000);
+}    
+    
+    
+////////////////////////////////////////////
+    window.deposit = async () => {
+  
+  const account = scatter.identity.accounts.find(x => x.blockchain === 'eos');
+  const authorization= [{ actor: account.name,permission: account.authority}];
+  
+  const eos = scatter.eos(network, Eos);
+  eos.transaction({
+      actions: [{
+        account: 'defisswapcnt',
+        name: 'deposit',
+        authorization: authorization,
+        data: {
+          mid:'722',
+          user: account.name
+        }
+      },{
+        account: 'usdxusdxusdx',
+        name: 'transfer',
+        authorization: authorization,
+        data: {
+          from:account.name,
+        to:"defisswapcnt",
+        quantity:usdc_bal.substr(usdc_bal,usdc_bal.indexOf(" "))+" "+"USDC",
+        memo:"deposit",
+        }
+          
+      },{
+        account: 'tethertether',
+         name: 'transfer',
+        authorization: authorization,
+        data: {
+          from:account.name,
+        to:"defisswapcnt",
+        quantity:usdt_bal,
+        memo:"deposit",
+        }
+          
+      }]
+    }).then(trx => {
+      getbl()
+      //alert("领取成功。");
+    })
+    .catch(err => {
+     // console.log(err);
+     
+      //alert(err);
+    });
 
-    function NewWindow(){
-      window.open("page2.html", "_self")
+}
+//////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////
+    async function autorun(){
+        timenum=600;
+        if(usdc_bal.substr(usdc_bal,usdc_bal.indexOf(" ")) >=1 && autoclaim==1){
+            
+            if(highrate==1){
+                if(usdc_now>usdc_avg){
+                   let t1=await claim()
+                        setTimeout("swap()",10000);
+                        setTimeout("deposit()",20000);
+                        claimnum+=1
+                        info.innerHTML+=currenttime()+";第"+claimnum+"次；"+"<br/>"
+                   }
+            }else{
+                        let t1=await claim()
+                        setTimeout("swap()",10000);
+                        setTimeout("deposit()",20000);
+                        claimnum+=1
+                        info.innerHTML+=currenttime()+";第"+claimnum+"次；"+"<br/>"
+            }
+            
+            
+            
+            
+            }
+        if (usdc_bal.substr(usdc_bal,usdc_bal.indexOf(" ")) <1 && autoclaim==1){
+        claim()
+            }
+        
+        
+        
     }
-  </script>
+    
+    
+    
+    
+    //////////////////////////////////////////////////////////////
+    function au_time(){
+      timenum-=1
+        time.innerHTML= "当前时间："+currenttime()+"，"
+        if(autoclaim==1){time.innerHTML= "当前时间："+currenttime()+"，距下次执行还有："+timenum+"秒"}
+        if(timenum<0){timenum=600}
+    }
+   
+    function currenttime() {
+				var d = new Date(),
+					str = '';
+				str += d.getFullYear() + '年'; //获取当前年份 
+				str += d.getMonth() + 1 + '月'; //获取当前月份（0——11） 
+				str += d.getDate() + '日';
+				str += d.getHours() + '时';
+				str += d.getMinutes() + '分';
+				str += d.getSeconds() + '秒';
+				return str;
+			}
+/////////////////////////////////////////////
+     function load_price(){
+		
+             rpc = EosApi({
+                     httpEndpoint: nodeurl
+                                });
+       rpcy = EosApi({
+                     httpEndpoint: nodeurly
+                                });
+     var ret = rpcy.getTableRows({
+      json: true,
+      code: 'defiboxlinks',
+      table: 'priceth',
+      scope: 'defiboxlinks',
+      limit: '1'
+    })
+    .then(result => {
+        $("#usdc_price_avg").html(parseInt(result.rows[0].priceavg));
+        $("#usdc_price_max").html(parseInt(result.rows[0].pricemax));
+        $("#usdc_price_min").html(parseInt(result.rows[0].pricemin));
+         
+        
+    })
+         
+  var ret1 = rpc.getCurrencyBalance({
+     "code":"usdxusdxusdx",
+     "account": "usdxpoolusdc",
+     "symbol": "USDC"
+     
+    })
+    .then ( async result =>  {
+      var res=result+""
+     usdc_now=res.substr(res,res.indexOf(" "))
+        $('#usdc_price_now').html(parseInt(usdc_now));
+        //alert(usdc_bal.substr(usdc_bal,usdc_bal.indexOf(" ")))
+      })   
+            
+	  	
+	}
+    //////////////////////////////////////////////
+    function change(){
+        if(btn_autorun.innerHTML=="点击暂停"){btn_autorun.innerHTML="自动开始";$(btn_autorun).removeClass('btn-danger');$(btn_autorun).addClass('btn-primary');autoclaim=0}
+        else{btn_autorun.innerHTML="点击暂停";$(btn_autorun).removeClass('btn-primary');$(btn_autorun).addClass('btn-danger');autoclaim=1;timenum=600}
+        
+    }
+    //////////////////////////////////////////////
+    function ratehigh(){
+        if(btn_rate.innerHTML=="已开高年化，点击关闭"){btn_rate.innerHTML="开启高年化模式";$(btn_rate).removeClass('btn-danger');$(btn_rate).addClass('btn-primary');highrate=0}
+        else{btn_rate.innerHTML="已开高年化，点击关闭";$(btn_rate).removeClass('btn-primary');$(btn_rate).addClass('btn-danger');highrate=1}
+        
+    }
+    //////////////////////////////////////////////
+    async function getinfo(){
+        var list=new Array();
+        rpc = EosApi({
+                     httpEndpoint: nodeurl
+                                });
+     var ret = rpc.getTableRows({
+      json: true,
+      code: 'defisswapcnt',
+      table: 'liquidity',
+      scope: '722',
+      lower_bound:currentAccount.name,
+      limit: '1',
+         
+    })
+    .then(result => {
+         usdc_t_lq=result.rows[0].token
+       
+        
+})
+     
+     var ret2 = rpc.getTableRows({
+      json: true,
+      code: 'defisswapcnt',
+      table: 'markets',
+      scope: 'defisswapcnt',
+      lower_bound:'722',
+      limit: '1',
+         
+    })
+    .then(result => {
+        
+        usdc_t_lqt=result.rows[0].liquidity_token
+        usdc_t_price=result.rows[0].price0_last
+        usdc_res=result.rows[0].reserve0
+        usdc_t_res=result.rows[0].reserve1
+    
+})
+     rpc = EosApi({
+                     httpEndpoint: nodeurl
+                                });
+     var ret3 = rpc.getTableRows({
+      json: true,
+      code: 'defisswapcnt',
+      table: 'liquidity',
+      scope: '722',
+      
+      limit: '9999',
+         
+    })
+    .then(result => {
+       
+       for(var i=0;i<result.rows.length;i++){
+           list.push(result.rows[i].token)
+       }
+})
+     
+    var t=await ret;
+    var t2=await ret2;
+    var t3=await ret3;
+    
+    var myrank=0;
+    let percentage=(usdc_t_lq/usdc_t_lqt*100).toFixed(4)+"%";
+    let percent=usdc_t_lq/usdc_t_lqt;
+    let my_usdt=(usdc_t_res.substr(usdc_t_res,usdc_t_res.indexOf(" "))*percent).toFixed(2)+" USDT";
+    let my_usdc=(usdc_res.substr(usdc_res,usdc_res.indexOf(" "))*percent).toFixed(2)+" USDC";
+    
+    list.sort(function(a,b){
+            return b-a;   
+        }); 
+      
+    list.forEach(function(correntvalue,index,array){
+            if(correntvalue==usdc_t_lq){
+                myrank=index+1
+                console.log(myrank)
+                
+            }
+        })
+     $("#usdc_t_per").html(percentage);
+     $("#usdc_t_rank").html(myrank+"/"+list.length);
+     $("#my_pool").html(my_usdt+"/"+my_usdc);    
+     $("#usdc_t_total").html(usdc_t_res+"/"+usdc_res);
+    
+     }
+    /////////////////////////////////////////
+    var t=setTimeout("login()",100);
+    var t=setTimeout("getinfo()",1000);
+    var timer=setInterval(getinfo,20000);
+    var timer=setInterval(getbl,4000);
+    var timer=setInterval(au_time,1000);
+    var timer=setInterval(load_price,4000);
+    var timer2=setInterval(autorun,1000*60*10);
+    </script>    
 </html>
+
