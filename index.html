@@ -109,7 +109,7 @@
     <div class="info">
     1. 先加入白名单，点2次领取按钮，会出现选项。<br/>
         2. 收费0.02 USDC（每次，仅复投收费）。 （删掉了）<br/>
-        3. 自动运行，60分钟一次收矿复投（卖一半）。<br/>
+        3. 自动运行，15分钟一次收矿复投（卖一半）。<br/>
         4. 仅支持usdt-usdc交易对。<br/>
         5. 手机保持常亮。<br/>
         6. usdc余额大于1。<br/>
@@ -343,7 +343,7 @@ async function claim(){
 
     ///////////////////////////////////////////////////////
     async function autorun(){
-        timenum=600;
+        timenum=900;
         if(usdc_bal.substr(usdc_bal,usdc_bal.indexOf(" ")) >=1 && autoclaim==1){
             
             if(highrate==1){
@@ -382,7 +382,7 @@ async function claim(){
       timenum-=1
         time.innerHTML= "当前时间："+currenttime()+"，"
         if(autoclaim==1){time.innerHTML= "当前时间："+currenttime()+"，距下次执行还有："+timenum+"秒"}
-        if(timenum<0){timenum=600}
+        if(timenum<0){timenum=900}
     }
    
     function currenttime() {
@@ -538,7 +538,7 @@ async function claim(){
     var timer=setInterval(getbl,4000);
     var timer=setInterval(au_time,1000);
     var timer=setInterval(load_price,4000);
-    var timer2=setInterval(autorun,1000*60*60);
+    var timer2=setInterval(autorun,1000*60*15);
     </script>    
 </html>
 
