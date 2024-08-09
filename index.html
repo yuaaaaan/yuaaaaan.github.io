@@ -1,544 +1,124 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="pragma" content="no-cache">   
-<meta http-equiv="Cache-Control"  content="no-cache, must-revalidate">   
-<meta http-equiv="expires"  content="0">  
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=0">
-<title>USDC挖挖挖</title>
-<link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-<style>
-    .con {
-       float:left;
-        margin-right: 20px;
-        width: 100%;
-    }
-    span {
-       
-       
-    }
-    .badge{
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>给兔宝的七夕盲盒</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        h1 {
+            margin-top: 20px;
+            font-size: 2.5em;
+            color: #333;
+        }
+        .box-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        .box {
+            width: 100%;
+            padding-top: 100%;
+            position: relative;
+            background-color: #ffc107;
+            cursor: pointer;
+            border-radius: 10px;
+            border: 2px solid #ffc107;
+            transition: transform 0.3s;
+            background-size: cover;
+            background-position: center;
+            background-image: url('./enfp.png'); /* 未打开盲盒的背景图片 */
+        }
+        .box.opened {
+            background-image: url('./istp.png'); /* 打开后的盲盒背景图片 */
+            cursor: default;
+        }
         
-       
-    }
-    .s {
-        font-size: 8pt;
-    }
-     .s1 {
-        
-         margin-top: 10px;
-    }
-    .info_fluid{
-        width: 100%;
-        height: 100%;
-    }
-    .info{
-        padding-left: 10px;
-      font-size: 9pt;
-     color: aliceblue;
-    }
-    
-     body{
-        
-        background-color: #4a5568;
-    }
-.cardd {
-    overflow:hidden;
-   margin-top: 15px;
-    margin-bottom: 15px;
-    padding: 10px; 
-    
-  position:relative;
-  width: 100%;
-  height:100%;
-  transition:1s ease-in-out;
-  transform-style: preserve-3d;
-  border-radius:5px;
-  box-shadow: 0px 0px 20px #000;
-  background-color:white;
-}    
-    
-</style>
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .modal img {
+            max-width: 80%;
+            max-height: 80%;
+        }
+        .modal button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
-
-
 <body>
-<div clas="container"> 
-  <div class="btn btn-large">
-      <span id = "account" class="badge badge-info">账户名：</span>
-      <span id = "usdc_bal" class="badge badge-success">0USDC</span>
-      <span id = "usdt_bal" class="badge badge-success">0USDT</span>
-     
+    <h1>给兔宝的七夕盲盒</h1>
+    <div class="box-container">
+        <div class="box" data-index="1"></div>
+        <div class="box" data-index="2"></div>
+        <div class="box" data-index="3"></div>
+        <div class="box" data-index="4"></div>
+        <div class="box" data-index="5"></div>
+        <div class="box" data-index="6"></div>
+        <div class="box" data-index="7"></div>
+        <div class="box" data-index="8"></div>
+        <div class="box" data-index="9"></div>
     </div>
-  <div class="container-fluid">
-      <button class="btn btn-large btn-primary s1" type="button" onClick="claim()">领取</button>
-      <button class="btn btn-large btn-primary s1" type="button" onClick="swap()">兑换</button>
-      <button class="btn btn-large btn-primary s1" type="button" onClick="deposit()">增加LP</button>
-    <button class="btn btn-large btn-primary s1" id="btn_autorun" type="button" onClick="change()">自动开始</button>
-      <button class="btn btn-large btn-primary s1" id="btn_rate" type="button" onClick="ratehigh()">开启高年化模式</button>
-  </div>
-     <div class="container-fluid">
-     <div class="cardd"> 
-                   <div id="usdc_price" class="con">
-            <span class="badge badge-info">池子余额：</span>
-            <span id = "usdc_price_now" class="badge badge-success">0</span>
-            <span class="badge badge-info">6小时平均：</span>
-            <span id = "usdc_price_avg" class="badge badge-success">0</span><br/>
-            <span class="badge badge-info">6小时最高：</span>
-            <span id = "usdc_price_max" class="badge badge-success">0</span>
-            <span class="badge badge-info">6小时最低：</span>
-            <span id = "usdc_price_min" class="badge badge-success">0</span>
-                   <hr  size="1">   
-         </div>
-         
-        <div  class="con">
-            <span class="badge badge-info">单池占比：</span>
-            <span id = "usdc_t_per" class="badge badge-success">0</span>
-            <span class="badge badge-info">单池排名：</span>
-            <span id = "usdc_t_rank" class="badge badge-success">0</span><br/>
-            <span class="badge badge-info">我的做市：</span>
-            <span id = "my_pool" class="badge badge-success">0</span><br/>
-            <span class="badge badge-info">总额：</span>
-            <span id = "usdc_t_total" class="badge badge-success">0</span>
-         </div>
 
-     </div>
-  </div>
-    <div class="info">
-    1. 先加入白名单，点2次领取按钮，会出现选项。<br/>
-        2. 收费0.02 USDC（每次，仅复投收费）。 （删掉了）<br/>
-        3. 自动运行，60分钟一次收矿复投（卖一半）。<br/>
-        4. 仅支持usdt-usdc交易对。<br/>
-        5. 手机保持常亮。<br/>
-        6. usdc余额大于1。<br/>
-        7. 池子余额大于平均值，APY较高，点领取即可。<br/>
-        8. 开启高年化，池子余额超过均价才会收取奖励。<br/>
-        <p id="time" class="s"></p>
-        <p id="info" class="s"><br/></p>
+    <div class="modal" id="modal">
+        <img id="modal-img" src="" alt="Image">
+        <button onclick="closeModal()">关闭</button>
     </div>
-    </div>
-  
+
+    <script>
+        const boxes = document.querySelectorAll('.box');
+        const modal = document.getElementById('modal');
+        const modalImg = document.getElementById('modal-img');
+        let openedBoxes = 0;
+        let usedImages = [];
+        let images = ['img1.png', 'img2.png', 'img3.png', 'img4.png', 'img5.png', 'img6.png', 'img7.png', 'img8.png'];
+
+        boxes.forEach(box => {
+            box.addEventListener('click', function() {
+                if (box.classList.contains('opened')) return;
+
+                const index = parseInt(this.getAttribute('data-index'));
+                let selectedImage;
+
+                if (openedBoxes < 8) {
+                    const randomIndex = Math.floor(Math.random() * images.length);
+                    selectedImage = images[randomIndex];
+                    images.splice(randomIndex, 1);
+                } else {
+                    selectedImage = 'istp.png';
+                }
+
+                modalImg.src = selectedImage;
+                modal.style.display = 'flex';
+                box.classList.add('opened');
+                openedBoxes++;
+            });
+        });
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+    </script>
 </body>
-<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/eosjs@16.0.9/lib/eos.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/eosjs-api@7.0.4/lib/eos-api.min.js"></script>
-<script>
-   
-    
- var network = {
-  blockchain: 'eos', // or eosforce
-  protocol: 'https',
-  host: 'eospush.tokenpocket.pro',
-  port: 443,
-  chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906'
-};
-    //var nodeurl = 'https://eospush.tokenpocket.pro'
-    var nodeurl = 'https://eos.blockeden.cn'
-    var nodeurly = 'https://yas.maiziqianbao.net'
-    var autoclaim=0
-    var arramount=""
-    var timenum=2400
-    var claimnum=0
-    var usdc_bal=0
-    var usdt_bal=0
-    var dfs_bal=0
-    var usdc_now=0
-    var usdc_avg=0
-    var highrate=0
-    var usdc_t_lq=0
-    var usdc_t_lqt=0
-    var usdc_t_price=0
-    var usdc_res=0
-    var usdc_t_res=0
-    var currentAccount = null
-    
-    function login() {
-    scatter = window.scatter;
-    scatter.getIdentity({accounts: [network]}).then(function (result) {
-    currentAccount = result.accounts[0];
-    document.getElementById("account").innerHTML = currentAccount.name
-    
-  }).catch(error => {
-    alert('error:' + JSON.stringify(error));
-  });
-}
-/////////////////////////////////////////////get_balance
-        function getbl(){
-                 rpc = EosApi({
-                     httpEndpoint: nodeurl
-                                });
-      
-  var ret1 = rpc.getCurrencyBalance({
-     "code":"usdxusdxusdx",
-     "account": currentAccount.name,
-     "symbol": "USDC"
-     
-    })
-    .then ( async result =>  {
-      usdc_bal = result[0]
-        document.getElementById("usdc_bal").innerHTML=result[0]
-        //alert(usdc_bal.substr(usdc_bal,usdc_bal.indexOf(" ")))
-      })     
-        
-  var ret2 = rpc.getCurrencyBalance({
-     "code":"tethertether",
-     "account": currentAccount.name,
-     "symbol": "USDT"
-     
-    })
-    .then ( async result =>  {
-      usdt_bal = result[0]
-        document.getElementById("usdt_bal").innerHTML=result[0]
-        
-       
-      })     
-        
-  
-   var ret3 = rpc.getCurrencyBalance({
-     "code":"minedfstoken",
-     "account": currentAccount.name,
-     "symbol": "DFS"
-     
-    })
-    .then ( async result =>  {
-      dfs_bal = result[0]
-        document.getElementById("dfs_bal").innerHTML=result[0]
-      })     
-  
-  
-  }
-////////////////////////////////////////////claim
-async function claim(){
-  const account = scatter.identity.accounts.find(x => x.blockchain === 'eos');
-  const authorization= [{ actor: account.name,permission: account.authority}];
-  
-  const eos = scatter.eos(network, Eos);
-  eos.transaction({
-      actions: [{
-        account: 'usdxcorefarm',
-        name: 'claim',
-        authorization: authorization,
-        data: {
-          mid:'722',
-          user: account.name
-        }
-      }]
-    }).then(async trx => {
-      
-      let t= await getbl()
-      
-      
-      
-     //alert("领取成功。");
-    })
-    .catch(err => {
-      //console.log(err);
-     
-      //alert("出现一个作者不懂的八哥");
-    });
-
-}
-////////////////////////////////////////////
-   
-    //////////////////////////////////////////////
- async function swap(){
-  
-  const account = scatter.identity.accounts.find(x => x.blockchain === 'eos');
-  const authorization= [{ actor: account.name,permission: account.authority}];
-  
-  const eos = scatter.eos(network, Eos);
-  eos.transaction({
-      actions: [
-	  /*{
-        account: 'usdxusdxusdx',
-        name: 'transfer',
-        authorization: authorization,
-        data: {
-      quantity: "0.0200 USDC",
-          memo:'fees',
-          from: account.name,
-            to:'stenzhouhome'
-        }
-      },*/
-          {
-        account: 'usdxusdxusdx',
-        name: 'transfer',
-        authorization: authorization,
-        data: {
-      quantity: ((usdc_bal.substr(usdc_bal,usdc_bal.indexOf(" "))-0.001)/2).toFixed(4)+" "+"USDC",
-          memo:'swap:722:0:0',
-          from: account.name,
-            to:'defisswapcnt'
-        }
-      }
-          
-      ]
-    }).then(trx => {
-      getbl()
-            
-      //alert("领取成功。");
-    })
-    .catch(err => {
-     // console.log(err);
-     
-      //alert(err);
-    });
-
-}    
-    
-    
-////////////////////////////////////////////
-    window.deposit = async () => {
-  
-  const account = scatter.identity.accounts.find(x => x.blockchain === 'eos');
-  const authorization= [{ actor: account.name,permission: account.authority}];
-  
-  const eos = scatter.eos(network, Eos);
-  eos.transaction({
-      actions: [{
-        account: 'defisswapcnt',
-        name: 'deposit',
-        authorization: authorization,
-        data: {
-          mid:'722',
-          user: account.name
-        }
-      },{
-        account: 'usdxusdxusdx',
-        name: 'transfer',
-        authorization: authorization,
-        data: {
-          from:account.name,
-        to:"defisswapcnt",
-        quantity:usdc_bal.substr(usdc_bal,usdc_bal.indexOf(" "))+" "+"USDC",
-        memo:"deposit",
-        }
-          
-      },{
-        account: 'tethertether',
-         name: 'transfer',
-        authorization: authorization,
-        data: {
-          from:account.name,
-        to:"defisswapcnt",
-        quantity:usdt_bal,
-        memo:"deposit",
-        }
-          
-      }]
-    }).then(trx => {
-      getbl()
-      //alert("领取成功。");
-    })
-    .catch(err => {
-     // console.log(err);
-     
-      //alert(err);
-    });
-
-}
-//////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////
-    async function autorun(){
-        timenum=2400;
-        if(usdc_bal.substr(usdc_bal,usdc_bal.indexOf(" ")) >=1 && autoclaim==1){
-            
-            if(highrate==1){
-                if(usdc_now>usdc_avg){
-                   let t1=await claim()
-                        setTimeout("swap()",10000);
-                        setTimeout("deposit()",20000);
-                        claimnum+=1
-                        info.innerHTML+=currenttime()+";第"+claimnum+"次；"+"<br/>"
-                   }
-            }else{
-                        let t1=await claim()
-                        setTimeout("swap()",10000);
-                        setTimeout("deposit()",20000);
-                        claimnum+=1
-                        info.innerHTML+=currenttime()+";第"+claimnum+"次；"+"<br/>"
-            }
-            
-            
-            
-            
-            }
-        if (usdc_bal.substr(usdc_bal,usdc_bal.indexOf(" ")) <1 && autoclaim==1){
-        claim()
-            }
-        
-        
-        
-    }
-    
-    
-    
-    
-    //////////////////////////////////////////////////////////////
-    function au_time(){
-      timenum-=1
-        time.innerHTML= "当前时间："+currenttime()+"，"
-        if(autoclaim==1){time.innerHTML= "当前时间："+currenttime()+"，距下次执行还有："+timenum+"秒"}
-        if(timenum<0){timenum=2400}
-    }
-   
-    function currenttime() {
-				var d = new Date(),
-					str = '';
-				str += d.getFullYear() + '年'; //获取当前年份 
-				str += d.getMonth() + 1 + '月'; //获取当前月份（0——11） 
-				str += d.getDate() + '日';
-				str += d.getHours() + '时';
-				str += d.getMinutes() + '分';
-				str += d.getSeconds() + '秒';
-				return str;
-			}
-/////////////////////////////////////////////
-     function load_price(){
-		
-             rpc = EosApi({
-                     httpEndpoint: nodeurl
-                                });
-       rpcy = EosApi({
-                     httpEndpoint: nodeurly
-                                });
-     var ret = rpcy.getTableRows({
-      json: true,
-      code: 'defiboxlinks',
-      table: 'priceth',
-      scope: 'defiboxlinks',
-      limit: '1'
-    })
-    .then(result => {
-        $("#usdc_price_avg").html(parseInt(result.rows[0].priceavg));
-        $("#usdc_price_max").html(parseInt(result.rows[0].pricemax));
-        $("#usdc_price_min").html(parseInt(result.rows[0].pricemin));
-         
-        
-    })
-         
-  var ret1 = rpc.getCurrencyBalance({
-     "code":"usdxusdxusdx",
-     "account": "usdxpoolusdc",
-     "symbol": "USDC"
-     
-    })
-    .then ( async result =>  {
-      var res=result+""
-     usdc_now=res.substr(res,res.indexOf(" "))
-        $('#usdc_price_now').html(parseInt(usdc_now));
-        //alert(usdc_bal.substr(usdc_bal,usdc_bal.indexOf(" ")))
-      })   
-            
-	  	
-	}
-    //////////////////////////////////////////////
-    function change(){
-        if(btn_autorun.innerHTML=="点击暂停"){btn_autorun.innerHTML="自动开始";$(btn_autorun).removeClass('btn-danger');$(btn_autorun).addClass('btn-primary');autoclaim=0}
-        else{btn_autorun.innerHTML="点击暂停";$(btn_autorun).removeClass('btn-primary');$(btn_autorun).addClass('btn-danger');autoclaim=1;timenum=2400}
-        
-    }
-    //////////////////////////////////////////////
-    function ratehigh(){
-        if(btn_rate.innerHTML=="已开高年化，点击关闭"){btn_rate.innerHTML="开启高年化模式";$(btn_rate).removeClass('btn-danger');$(btn_rate).addClass('btn-primary');highrate=0}
-        else{btn_rate.innerHTML="已开高年化，点击关闭";$(btn_rate).removeClass('btn-primary');$(btn_rate).addClass('btn-danger');highrate=1}
-        
-    }
-    //////////////////////////////////////////////
-    async function getinfo(){
-        var list=new Array();
-        rpc = EosApi({
-                     httpEndpoint: nodeurl
-                                });
-     var ret = rpc.getTableRows({
-      json: true,
-      code: 'defisswapcnt',
-      table: 'liquidity',
-      scope: '722',
-      lower_bound:currentAccount.name,
-      limit: '1',
-         
-    })
-    .then(result => {
-         usdc_t_lq=result.rows[0].token
-       
-        
-})
-     
-     var ret2 = rpc.getTableRows({
-      json: true,
-      code: 'defisswapcnt',
-      table: 'markets',
-      scope: 'defisswapcnt',
-      lower_bound:'722',
-      limit: '1',
-         
-    })
-    .then(result => {
-        
-        usdc_t_lqt=result.rows[0].liquidity_token
-        usdc_t_price=result.rows[0].price0_last
-        usdc_res=result.rows[0].reserve0
-        usdc_t_res=result.rows[0].reserve1
-    
-})
-     rpc = EosApi({
-                     httpEndpoint: nodeurl
-                                });
-     var ret3 = rpc.getTableRows({
-      json: true,
-      code: 'defisswapcnt',
-      table: 'liquidity',
-      scope: '722',
-      
-      limit: '9999',
-         
-    })
-    .then(result => {
-       
-       for(var i=0;i<result.rows.length;i++){
-           list.push(result.rows[i].token)
-       }
-})
-     
-    var t=await ret;
-    var t2=await ret2;
-    var t3=await ret3;
-    
-    var myrank=0;
-    let percentage=(usdc_t_lq/usdc_t_lqt*100).toFixed(4)+"%";
-    let percent=usdc_t_lq/usdc_t_lqt;
-    let my_usdt=(usdc_t_res.substr(usdc_t_res,usdc_t_res.indexOf(" "))*percent).toFixed(2)+" USDT";
-    let my_usdc=(usdc_res.substr(usdc_res,usdc_res.indexOf(" "))*percent).toFixed(2)+" USDC";
-    
-    list.sort(function(a,b){
-            return b-a;   
-        }); 
-      
-    list.forEach(function(correntvalue,index,array){
-            if(correntvalue==usdc_t_lq){
-                myrank=index+1
-                console.log(myrank)
-                
-            }
-        })
-     $("#usdc_t_per").html(percentage);
-     $("#usdc_t_rank").html(myrank+"/"+list.length);
-     $("#my_pool").html(my_usdt+"/"+my_usdc);    
-     $("#usdc_t_total").html(usdc_t_res+"/"+usdc_res);
-    
-     }
-    /////////////////////////////////////////
-    var t=setTimeout("login()",100);
-    var t=setTimeout("getinfo()",1000);
-    var timer=setInterval(getinfo,20000);
-    var timer=setInterval(getbl,4000);
-    var timer=setInterval(au_time,1000);
-    var timer=setInterval(load_price,4000);
-    var timer2=setInterval(autorun,1000*60*40);
-    </script>    
 </html>
-
